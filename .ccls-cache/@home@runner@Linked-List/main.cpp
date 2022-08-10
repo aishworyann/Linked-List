@@ -19,12 +19,9 @@ void push(Node ** head_ref, int value){
   Node* new_node = new Node(); // allocating the new node
   new_node->data=value;// storing the value to the new node
   
-  if(*head_ref==NULL){
-    *head_ref=new_node;
-  }else{
   new_node->next= (*head_ref);// pointing the next pointer to current head 
   (*head_ref)=new_node;//making new node as head
-  }
+  
   
 }
 
@@ -66,38 +63,47 @@ void insert_last(Node **head_ref, int value){
 }
 
 
+//main function 
 int main() {
 
   Node* head=NULL;
-  // Node* second=NULL;
-  // Node* third=NULL;
+  Node* second=NULL;
+  Node* third=NULL;
+  
 // Allocate the new nodes
     head = new Node();
-    // second = new Node();
-    // third = new Node();
+    second = new Node();
+    third = new Node();
   
-  // head->data=5;             //inserting the value
-  // head->next=NULL;        //pointing the next pointer to the next node
+  head->data=5;             //inserting the value
+  head->next=second;        //pointing the next pointer to the next node
 
-  // second->data=10;
-  // second->next=third;
+  second->data=10;
+  second->next=third;
 
-  // third->data=20;
-  // third->next=NULL;
+  third->data=20;
+  third->next=NULL;
 
   
 //insertion of node before front 
  push(&head,100);                   //as we are using double pointer , we need to pass the address                                       of the head pointer in the function 
                                    // time complexity is O(1)
-  push(&head,200);
-  push(&head,300);
-  push(&head,400);
+  
 //insertion of node after a node 
- // insertafter(second, 200);        // first arg is the node we want to add the node after , second                                       is the value
+ insertafter(second, 200);        // first arg is the node we want to add the node after , second                                       is the value
                                   // time complexity is O(n)
   
 //insertion of a node at last
   insert_last(&head, 1000);
+
+ display(head);
+cout<<endl;
+  
+//deletion of first element 
+ Node* temp = head ;              //copying the head to a temp node
+  head = head->next;              //point the head to the next head
+  free(temp);                    // free the memory used -> we can use 'delete' also 
+  // delete_front(head);
   
 //fucntion to display the linked list
  display(head);
