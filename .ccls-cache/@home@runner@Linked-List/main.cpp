@@ -62,6 +62,28 @@ void insert_last(Node **head_ref, int value){
   
 }
 
+void delete_front(Node** head_ref){
+  Node* temp= new Node();
+  temp= *head_ref;         //copying the head to a temp node
+  *head_ref=temp->next;    //point the head to the next head
+  free(temp);              // free the memory used -> we can use 'delete' also 
+  return;
+  
+}
+
+void delete_last(Node* head_ref){
+
+  Node* temp= new Node();
+  Node* prev_node=new Node();
+  temp= head_ref;
+  // prev_node=head_ref;
+  while(temp->next != NULL){
+    prev_node=temp;
+    temp=temp->next;
+    
+    
+  }
+}
 
 //main function 
 int main() {
@@ -100,10 +122,11 @@ int main() {
 cout<<endl;
   
 //deletion of first element 
- Node* temp = head ;              //copying the head to a temp node
-  head = head->next;              //point the head to the next head
-  free(temp);                    // free the memory used -> we can use 'delete' also 
-  // delete_front(head);
+  
+  delete_front(&head);
+
+//deletion of last element
+  
   
 //fucntion to display the linked list
  display(head);
