@@ -14,6 +14,8 @@ void display(Node* head){
     head=head->next;
   }
 }
+
+
 // funtion to insert the node at front 
 void push(Node ** head_ref, int value){
   Node* new_node = new Node(); // allocating the new node
@@ -89,9 +91,21 @@ void delete_last(Node* head_ref){
 }
 
 //function to delete a node
-void delete(Node* head_ref,int count){
+void delete_node(Node* head_ref,int count){
+  int i =1; 
+  Node* next_node= new Node();
+  Node* prev= head_ref;
+
+  while (i<count-1){    //loop will run till count -1 so that we can access the next                               element
+    prev=prev->next;
+    i++;
   
+  }
+  next_node= prev->next; 
+    prev->next=next_node->next;
+  free(next_node);
 }
+
 //main function 
 int main() {
 
@@ -125,7 +139,7 @@ int main() {
 //insertion of a node at last
   insert_last(&head, 1000);
 
- display(head);
+ // display(head);
 cout<<endl;
   
 //deletion of first element 
@@ -135,6 +149,13 @@ cout<<endl;
 //deletion of last element
   
   delete_last(head);
+
+//deletion of an element
+ display(head);
+ delete_node(head, 2);
+cout<<endl;
+
+  
 //fucntion to display the linked list
  display(head);
   

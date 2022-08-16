@@ -14,6 +14,8 @@ void display(Node* head){
     head=head->next;
   }
 }
+
+
 // funtion to insert the node at front 
 void push(Node ** head_ref, int value){
   Node* new_node = new Node(); // allocating the new node
@@ -71,18 +73,35 @@ void delete_front(Node** head_ref){
   
 }
 
+//function to delete last node 
 void delete_last(Node* head_ref){
 
-  Node* temp= new Node();
-  Node* prev_node=new Node();
-  temp= head_ref;
-  // prev_node=head_ref;
+  Node* temp =head_ref;
+  Node* prev_node = NULL;  // pointer to maintain 
   while(temp->next != NULL){
-    prev_node=temp;
-    temp=temp->next;
-    
-    
+   prev_node=temp;
+   temp=temp->next;
+ }
+  if(temp== head_ref){
+    head_ref=NULL;
+  }else{
+    prev_node->next=NULL;
+    free(temp);
   }
+}
+
+//function to delete a node
+void delete_node(Node* head_ref,int count){
+  int i =1; 
+  Node* next_node= new Node();
+  Node* temp= head_ref;
+  while (i<count){
+    temp=temp->next;
+    i++;
+  }
+  next_node= temp->next;
+    temp->next=next_node->next;
+  free(next_node);
 }
 
 //main function 
@@ -118,15 +137,22 @@ int main() {
 //insertion of a node at last
   insert_last(&head, 1000);
 
- display(head);
+ // display(head);
 cout<<endl;
   
 //deletion of first element 
   
-  delete_front(&head);
+  // delete_front(&head);
 
 //deletion of last element
   
+  // delete_last(head);
+
+//deletion of an element
+ display(head);
+  int count=1;
+  delete_node(head, count);
+cout<<endl;
   
 //fucntion to display the linked list
  display(head);
